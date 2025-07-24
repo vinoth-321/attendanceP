@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+*.sqlite3
+*.log
+*.pot
+*.mo
+
+# Virtual env
+venv/
+.venv/
+ENV/
+env/
+*.egg-info/
+
+# VS Code
+.vscode/
+
+# Django static & media (optional if generated)
+staticfiles/
+media/
+
+# OS files
+.DS_Store
+Thumbs.db
