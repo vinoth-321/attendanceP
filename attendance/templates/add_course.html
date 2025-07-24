@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Course</title>
+</head>
+<body>
+    <h2>Add New Course</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Add Course</button>
+    </form>
+
+    <br>
+    <a href="{% url 'admin_dashboard' %}">⬅ Back to Admin Dashboard</a>
+</body>
+</html>

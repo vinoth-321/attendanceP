@@ -1,0 +1,6 @@
+<h2>Staff Dashboard</h2>
+<ul>
+  {% for course in courses %}
+    <li>{{ course.name }} - <a href="{% url 'mark_attendance' course.id %}">Mark Attendance</a></li>
+  {% endfor %}
+</ul>
