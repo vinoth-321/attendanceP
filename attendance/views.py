@@ -201,8 +201,8 @@ def attendance_view(request):
         course_data.append({
             'course': course,
             'total_marked': records.count(),
-            'present': records.filter(is_present=True).count(),
-            'absent': records.filter(is_present=False).count(),
+            'present': records.filter(status='present').count(),
+            'absent': records.filter(status='absent').count(),
         })
 
     selected_course = None

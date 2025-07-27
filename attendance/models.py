@@ -33,3 +33,6 @@ class AttendanceRecord(models.Model):
 
     def __str__(self):
         return f"{self.student.name} - {self.course.name} - {self.date} - {self.status}"
+    @property
+    def is_present(self):
+        return self.status == 'present'
