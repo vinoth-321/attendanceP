@@ -1,0 +1,110 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Modify Student</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(to right, #f2f5f8, #eaf0f6);
+      padding: 2rem;
+    }
+
+    .container {
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      font-size: 1.6rem;
+      font-weight: 600;
+      margin-bottom: 30px;
+    }
+
+    table {
+      font-size: 0.95rem;
+    }
+
+    .btn {
+      border-radius: 10px;
+      padding: 6px 16px;
+    }
+
+    @media (max-width: 576px) {
+      h2 {
+        font-size: 1.4rem;
+      }
+
+      table, thead, tbody, th, td, tr {
+        display: block;
+      }
+
+      thead {
+        display: none;
+      }
+
+      tr {
+        margin-bottom: 1rem;
+        background: #f8f9fa;
+        padding: 1rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      }
+
+      td {
+        display: flex;
+        justify-content: space-between;
+        padding: 6px 0;
+        border: none;
+      }
+
+      td::before {
+        font-weight: 600;
+        content: attr(data-label);
+        flex: 1;
+        color: #333;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2 class="text-center">Modify Student</h2>
+
+    <table class="table table-bordered table-hover shadow-sm">
+      <thead class="table-dark">
+        <tr>
+          <th>Name</th>
+          <th>Mobile</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for student in students %}
+          <tr>
+            <td data-label="Name">{{ student.name }}</td>
+            <td data-label="Mobile">{{ student.mobile_number }}</td>
+            <td data-label="Actions">
+              <a href="{% url 'modify_student' student.id %}" class="btn btn-warning btn-sm me-2">Edit</a>
+              <a href="{% url 'delete_student' student.id %}" class="btn btn-danger btn-sm"
+                 onclick="return confirm('Are you sure you want to delete this student?');">Delete</a>
+            </td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td colspan="3" class="text-center">No students found.</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <div class="text-center">
+      <a href="{% url 'admin_dashboard' %}" class="btn btn-secondary mt-3">Back to Dashboard</a>
+    </div>
+  </div>
+</body>
+</html>

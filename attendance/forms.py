@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import Student, Course
+from .models import Student, Course, Staff
 
 class StaffRegisterForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
@@ -12,15 +12,20 @@ class StaffRegisterForm(forms.ModelForm):
 
     def clean(self):
         cleaned_data = super().clean()
-        password = cleaned_data.get("password")
-        confirm_password = cleaned_data.get("confirm_password")
-        if password != confirm_password:
+        if cleaned_data.get("password") != cleaned_data.get("confirm_password"):
             raise forms.ValidationError("Passwords do not match!")
 
-class StudentRegisterForm(forms.Form):
-    name = forms.CharField(max_length=100)
-    roll_number = forms.CharField(max_length=20)
-    course = forms.ModelChoiceField(queryset=Course.objects.all())
+class StudentRegisterForm(forms.ModelForm):
+    class Meta:
+        model = Student
+        fields = ['name', 'mobile_number', 'course']
+        widgets = {
+            'mobile_number': forms.TextInput(attrs={
+                'placeholder': 'Enter 10-digit mobile number',
+                'pattern': '[0-9]{10}',
+                'title': 'Enter valid 10 digit mobile number'
+            })
+        }
 
 class CourseForm(forms.ModelForm):
     class Meta:
@@ -28,5 +33,6 @@ class CourseForm(forms.ModelForm):
         fields = ['name']
 
 class AssignCourseForm(forms.Form):
-    staff = forms.ModelChoiceField(queryset=User.objects.filter(is_superuser=False))
-    course = forms.ModelChoiceField(queryset=Course.objects.all())
+    staff = forms.ModelChoiceField(queryset=Staff.objects.all())
+    courses = forms.ModelMultipleChoiceField(
+        queryset=Course.objects.all(), widget=forms.CheckboxSelectMultiple)

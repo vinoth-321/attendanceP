@@ -131,7 +131,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'vk4649559@gmail.com'
-EMAIL_HOST_PASSWORD = 'loum vgoy twfe vfzl'
+EMAIL_HOST_PASSWORD = 'xfxo oofz bzpm vqpi'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 ADMIN_EMAIL = 'vinothkumar15122005@gmail.com'
 

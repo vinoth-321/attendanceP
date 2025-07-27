@@ -1,8 +1,53 @@
-<h2>Mark Attendance for {{ course.name }}</h2>
-<form method="post">
-  {% csrf_token %}
-  {% for student in students %}
-    <input type="checkbox" name="present" value="{{ student.id }}"> {{ student.name }}<br>
-  {% endfor %}
-  <button type="submit">Submit Attendance</button>
-</form>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}Mark Attendance | Spoko{% endblock %}</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body {
+      background: linear-gradient(to right, #667eea, #764ba2);
+      min-height: 100vh;
+      color: #fff;
+      padding: 2rem;
+    }
+    .attendance-form {
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 1rem;
+      padding: 2rem;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+    .form-check {
+      margin-bottom: 0.75rem;
+    }
+    .form-check-input:checked {
+      background-color: #28a745;
+      border-color: #28a745;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    {% block content %}
+      <h2 class="text-center mb-4">📋 Mark Attendance for {{ course.name }}</h2>
+      <form method="post" class="attendance-form">
+        {% csrf_token %}
+        {% for student in students %}
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="present" value="{{ student.id }}" id="student{{ student.id }}">
+            <label class="form-check-label" for="student{{ student.id }}">
+              {{ student.name }}
+            </label>
+          </div>
+        {% empty %}
+          <p>No students registered for this course.</p>
+        {% endfor %}
+        <button type="submit" class="btn btn-success mt-3">✅ Submit Attendance</button>
+      </form>
+    {% endblock %}
+  </div>
+</body>
+</html>
