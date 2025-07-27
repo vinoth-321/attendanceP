@@ -214,13 +214,23 @@ def attendance_view(request):
         course_students = students.filter(course=selected_course)
         for student in course_students:
             total = AttendanceRecord.objects.filter(student=student, course=selected_course).count()
-            present = AttendanceRecord.objects.filter(student=student, course=selected_course, is_present=True).count()
+            present = AttendanceRecord.objects.filter(student=student, course=selected_course, status='present').count()
             today_status = AttendanceRecord.objects.filter(student=student, course=selected_course, date=selected_date).first()
+
+            # Using status field directly instead of is_present
+            if today_status:
+                if today_status.status == 'present':
+                    today_display = 'Present'
+                else:
+                    today_display = 'Absent'
+            else:
+                today_display = 'Not Marked'
+
             course_student_data.append({
                 'student': student,
                 'total_classes': total,
                 'present_count': present,
-                'today': 'Present' if today_status and today_status.is_present else 'Absent' if today_status else 'Not Marked'
+                'today': today_display
             })
 
     return render(request, 'attendance_view.html', {
