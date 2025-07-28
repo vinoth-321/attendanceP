@@ -133,6 +133,6 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'vk4649559@gmail.com'
 EMAIL_HOST_PASSWORD = 'xfxo oofz bzpm vqpi'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
-ADMIN_EMAIL = 'vinothkumar15122005@gmail.com'
+ADMIN_EMAIL = 'spokoacademysvks@gmail.com'
 
 
