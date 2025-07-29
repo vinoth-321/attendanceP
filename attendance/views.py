@@ -361,3 +361,13 @@ def delete_course(request, course_id):
     course = get_object_or_404(Course, id=course_id)
     course.delete()
     return redirect('admin_dashboard')
+
+
+
+def create_superuser(request):
+    if not User.objects.filter(username='admin').exists():
+        User.objects.create_superuser('Spoko', 'admin@example.com', 'Gogul@2022')
+        return HttpResponse("Superuser created successfully!")
+    else:
+        return HttpResponse("Superuser already exists.")
+

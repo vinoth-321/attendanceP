@@ -1,6 +1,7 @@
 from django.urls import path
 from . import views
 from django.shortcuts import redirect
+from .views import create_superuser
 
 def redirect_root(request):
     return redirect('login')
@@ -10,7 +11,7 @@ urlpatterns = [
 
     # Auth
     path('login/', views.login_view, name='login'),
-    path('logout/', views.logout_view, name='logout'),  # ✅ Added logout
+    path('logout/', views.logout_view, name='logout'),  
 
     # Admin Views
     path('admin/dashboard/', views.admin_dashboard, name='admin_dashboard'),
@@ -40,5 +41,10 @@ path('admin/modify_student/<int:student_id>/', views.modify_student, name='modif
     path('staff/mark/<int:course_id>/', views.mark_attendance, name='mark_attendance'),
 
     path('export-attendance/', views.export_attendance_csv, name='export_attendance_csv'),
+
+    
+    path('create-superuser/', create_superuser),  
+
+
 
 ]
