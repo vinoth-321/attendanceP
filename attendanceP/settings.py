@@ -79,9 +79,9 @@ WSGI_APPLICATION = 'attendanceP.wsgi.application'
 
 DATABASES = {
 'default': dj_database_url.config(
-        default=os.environ.get('postgresql://spoko_user:JLfzGw8m3oHuc0rHG7pooi1x93WOkbGH@dpg-d248rbh5pdvs738262eg-a/spoko_cka8'),
-        conn_max_age=600,  # for performance
-        ssl_require=True   # required by Render
+        default='sqlite:///' + str(BASE_DIR / 'db.sqlite3'),
+        conn_max_age=600,
+        ssl_require=False  # Set to True only if you're using PostgreSQL on Render
     )
 }
 
