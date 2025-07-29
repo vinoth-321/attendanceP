@@ -1,7 +1,7 @@
 from django.urls import path
 from . import views
 from django.shortcuts import redirect
-from .views import create_superuser
+
 
 def redirect_root(request):
     return redirect('login')
