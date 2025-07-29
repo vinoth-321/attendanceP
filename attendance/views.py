@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib import messages
+from django.core.management import call_command
 from django.forms import modelform_factory
 from django.utils.timezone import now
 from datetime import date
@@ -371,3 +372,9 @@ def create_superuser(request):
     else:
         return HttpResponse("Superuser already exists.")
 
+def run_migrations(request):
+    try:
+        call_command('migrate')
+        return HttpResponse("Migrations applied successfully!")
+    except Exception as e:
+        return HttpResponse(f"Error: {str(e)}")

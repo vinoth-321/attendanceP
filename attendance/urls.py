@@ -45,6 +45,6 @@ path('admin/modify_student/<int:student_id>/', views.modify_student, name='modif
     
     path('create-superuser/', create_superuser),  
 
-
+   path('run-migrations/', views.run_migrations),
 
 ]
