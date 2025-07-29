@@ -43,8 +43,6 @@ path('admin/modify_student/<int:student_id>/', views.modify_student, name='modif
     path('export-attendance/', views.export_attendance_csv, name='export_attendance_csv'),
 
     
-    path('create-superuser/', create_superuser),  
-
-   path('run-migrations/', views.run_migrations),
+  
 
 ]

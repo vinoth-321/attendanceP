@@ -365,16 +365,3 @@ def delete_course(request, course_id):
 
 
 
-def create_superuser(request):
-    if not User.objects.filter(username='admin').exists():
-        User.objects.create_superuser('Spoko', 'admin@example.com', 'Gogul@2022')
-        return HttpResponse("Superuser created successfully!")
-    else:
-        return HttpResponse("Superuser already exists.")
-
-def run_migrations(request):
-    try:
-        call_command('migrate')
-        return HttpResponse("Migrations applied successfully!")
-    except Exception as e:
-        return HttpResponse(f"Error: {str(e)}")
